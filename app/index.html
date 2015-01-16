@@ -1,0 +1,38 @@
+<!doctype html>
+<html class="no-js">
+  <head>
+    <meta charset="utf-8">
+    <title>blague</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <!-- build:css(.tmp) styles/main.css -->
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:700italic,400,700,800' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="styles/main.css">
+    <!-- endbuild -->
+
+  </head>
+  <body>
+    <!--[if lt IE 10]>
+      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+    <div class="fb-root"></div>
+    <div class="content">
+    </div>
+    <script async src="http://connect.facebook.net/en_US/sdk.js"></script>
+
+    <script>
+      window.fbAsyncInit = function() {
+        (function(d, s, id){
+           var js, fjs = d.getElementsByTagName(s)[0];
+           if (d.getElementById(id)) {return;}
+           js = d.createElement(s); js.id = id;
+           js.src = "/scripts/main.js";
+           fjs.parentNode.insertBefore(js, fjs);
+         }(document, 'script', 'bscr'));
+      };
+    </script>
+
+</body>
+</html>

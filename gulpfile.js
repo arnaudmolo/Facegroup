@@ -1,6 +1,6 @@
 'use strict';
 
-var gulp, del, path, $, dist, app, browserify, reactify, to5Browserify, fs, envify, exec;
+var gulp, del, path, $, dist, app, browserify, reactify, to5Browserify, fs, envify, exec, brShim;
 
 del           = require('del');
 fs            = require('fs');
@@ -13,6 +13,7 @@ $             = require('gulp-load-plugins')();
 browserify    = require('browserify');
 to5Browserify = require('6to5ify');
 envify        = require('envify');
+brShim        = require('browserify-shim');
 
 dist          = './dist';
 app           = './app/';
@@ -20,15 +21,15 @@ app           = './app/';
 // Styles
 gulp.task('styles', function () {
 
-  return gulp.src(app + 'styles/main.scss')
+  return gulp.src(app + 'styles/main.sass')
     .pipe($.plumber())
     .pipe($.rubySass({
       style: 'expanded',
       precision: 10,
-      loadPath: ['./front/bower_components'],
+      // loadPath: ['./front/bower_components'],
       compass: true
     }))
-    .pipe(gulp.dest(dist + '/styles'))
+    .pipe(gulp.dest(dist + '/styles/'))
     .pipe($.size());
 
 });
@@ -38,6 +39,7 @@ gulp.task('cordova-scripts', function(){
   return browserify({ debug: false })
     .transform(to5Browserify.configure({ modules: 'commonInterop', experimental: true}))
     .transform(envify)
+    .transform(brShim)
     .require(app + 'scripts/main.js', { entry: true })
     .bundle()
     .pipe(fs.createWriteStream('./cordova/www/js/main.js'))
@@ -47,9 +49,12 @@ gulp.task('cordova-scripts', function(){
 
 gulp.task('scripts', function(){
 
+  console.log(brShim);
+
   return browserify({ debug: false })
     .transform(to5Browserify.configure({ modules: 'commonInterop', experimental: true}))
     .transform(envify)
+    .transform(brShim)
     .require(app + 'scripts/main.js', { entry: true })
     .bundle()
     .pipe(fs.createWriteStream(dist + '/scripts/main.js'));
