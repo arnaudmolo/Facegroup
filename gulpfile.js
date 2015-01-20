@@ -19,7 +19,7 @@ dist          = './dist';
 app           = './app/';
 
 // Styles
-gulp.task('styles', function () {
+gulp.task('styles-', function () {
 
   return gulp.src(app + 'styles/main.sass')
     .pipe($.plumber())
@@ -29,6 +29,17 @@ gulp.task('styles', function () {
       // loadPath: ['./front/bower_components'],
       compass: true
     }))
+    .pipe(gulp.dest(dist + '/styles/'))
+    .pipe($.size());
+
+});
+
+gulp.task('styles', function () {
+
+  return gulp.src(app + 'styles/*.less')
+    .pipe($.plumber())
+    .pipe($.less())
+    .pipe($.autoprefixer({cascade: false, browsers: ['last 2 versions']}))
     .pipe(gulp.dest(dist + '/styles/'))
     .pipe($.size());
 
@@ -69,7 +80,8 @@ gulp.task('compress', ['scripts'], function(){
 
   return gulp.src(dist + '/scripts/*.js')
     .pipe($.uglify())
-    .pipe(gulp.dest(dist + '/scripts'));
+    .pipe(gulp.dest(dist + '/scripts'))
+    .pipe($.size());
 
 });
 

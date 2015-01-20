@@ -4,8 +4,7 @@ import FB from 'fb';
 import { app_id } from './constant';
 import router from './router';
 import Login from './components/login';
-import GroupList from './components/group-list';
-import Group from './components/group';
+import Content from './components/content';
 
 var init;
 
@@ -15,40 +14,13 @@ FB.init({
   version    : 'v2.2'
 });
 
-// FB.logout();
-
-// FB.getLoginStatus(function(res){
-
-//   console.log(res);
-
-//   try {
-//     FB.logout(function(){
-//       console.log('loggedout');
-//     });
-//   } catch(e) {
-//     console.log(e);
-//   }
-
-//   if (res.status !== 'connected') {
-//     React.render(
-//       <Login />,
-//       document.getElementsByClassName('content')[0]
-//     );
-//     // FB.login(function(res){
-//     //   console.log(res);
-//     // });
-//   }else{
-//     init(res.authResponse);
-//   };
-// });
-
 FB.login(function(res){
 
   var authRes;
 
   authRes = res.authResponse;
 
-  init(authRes)
+  init(authRes);
 
 }, {
   scope: 'user_groups'
@@ -56,20 +28,35 @@ FB.login(function(res){
 
 function init(authRes) {
 
+  var groups;
+
+  function getGroups(cb) {
+
+    if (groups) {
+      return cb(groups);
+    };
+
+    FB.api('/me?fields=groups', (res) => {
+      groups = res.groups;
+      cb(res.groups);
+    });
+
+  }
+
   router
     .route('index', '/', function(req) {
 
-      FB.api('/me?fields=groups', (res) => {
-        this.render(GroupList, {groups: res.groups});
+      getGroups((groups) => {
+        this.render(Content, {groups: groups});
       });
 
     })
     .route('group', '/group/:id', function(req){
 
-      console.log('?????????????');
-
-      FB.api('/' + req.params.id + '/feed', (res) => {
-        this.render(Group, {posts: res});
+      getGroups((groups) => {
+        FB.api('/' + req.params.id + '/feed', (res) => {
+          this.render(Content, {posts: res, groups: groups});
+        });
       });
 
     })

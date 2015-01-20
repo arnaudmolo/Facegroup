@@ -11,8 +11,6 @@ export default React.createClass(
 
       groups = this.props.groups.data;
 
-      console.log('ici', groups);
-
       groupElements = groups.map(function(d){
         return {
           type: MenuItem.Types.LINK,

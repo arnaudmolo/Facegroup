@@ -1,11 +1,14 @@
 import React from 'react/addons';
 import FB from 'fb';
-
-var authRes = {};
+import Post from './post';
 
 export default React.createClass(
 
   class Group {
+
+    componentDidMount() {
+
+    }
 
     render(){
 
@@ -14,14 +17,12 @@ export default React.createClass(
       data = this.props.posts.data;
 
       posts = data.map(function(d, i){
-
-        return (<p>{d.message}</p>);
-
+        return (
+          <Post key={d.id} post={d}></Post>
+        );
       });
 
-      return (<div>
-        { posts }
-      </div>);
+      return (<div>{ posts }</div>);
     }
 
   }.prototype
