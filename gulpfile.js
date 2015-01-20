@@ -49,14 +49,18 @@ gulp.task('cordova-scripts', function(){
 
 gulp.task('scripts', function(){
 
-  console.log(brShim);
-
   return browserify({ debug: false })
     .transform(to5Browserify.configure({ modules: 'commonInterop', experimental: true}))
     .transform(envify)
     .transform(brShim)
     .require(app + 'scripts/main.js', { entry: true })
     .bundle()
+    .on('error', function(err){
+      // print the error (can replace with gulp-util)
+      console.log(err.message);
+      // end this stream
+      this.emit('end');
+    })
     .pipe(fs.createWriteStream(dist + '/scripts/main.js'));
 
 });
@@ -123,6 +127,7 @@ gulp.task('serve', function(){
   gulp.src(dist)
     .pipe($.webserver({
       livereload: true,
+      fallback: 'index.html',
       port: 9000
     }));
 
