@@ -1,4 +1,5 @@
 import React from 'react/addons';
+import {LeftNav, MenuItem} from 'material-ui';
 
 export default React.createClass(
 
@@ -13,12 +14,13 @@ export default React.createClass(
       console.log('ici', groups);
 
       groupElements = groups.map(function(d){
-        return (<div key={d.id}><a href={"/group/" + d.id} className="group-element">{d.name}</a></div>);
+        return {
+          type: MenuItem.Types.LINK,
+          payload: "/group/" + d.id,
+          text: d.name
+        };
       });
-
-      return (<div>
-        {groupElements}
-      </div>);
+      return (<LeftNav menuItems={groupElements} />);
     }
 
   }.prototype
