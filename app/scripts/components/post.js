@@ -20,6 +20,8 @@ export default React.createClass(
         console.error('Type doesn\'t match any facebook type');
       };
 
+      console.log(post);
+
       return (
         <div className="post">
           <header>

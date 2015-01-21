@@ -35,12 +35,10 @@ export default React.createClass(
         );
       };
 
-      rest = rest?<span onClick={this.handleShowMore}>Show more</span>:undefined
-
       return (
         <div>
           <ul>{commentsList}</ul>
-          {rest}
+          {rest?<span onClick={this.handleShowMore}>Show more</span>:undefined}
         </div>
       );
 

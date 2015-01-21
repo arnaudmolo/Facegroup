@@ -61,7 +61,6 @@ function init(authRes) {
 
       getGroups((groups) => {
         FB.api('/' + req.params.id + '/feed', (res) => {
-          console.log(res);
           this.render(Content, {posts: res, groups: groups});
         });
       });
