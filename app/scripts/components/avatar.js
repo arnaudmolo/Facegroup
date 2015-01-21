@@ -11,7 +11,7 @@ export default React.createClass(
       user = this.props.user;
 
       return (
-        <a href={'https://www.facebook.com/' + user.id}>
+        <a href={'https://www.facebook.com/' + user.id} target="_blank">
           <img src={'http://graph.facebook.com/' + user.id + '/picture?type=square'}></img>
           <h4>{user.name}</h4>
         </a>

@@ -14,17 +14,23 @@ FB.init({
   version    : 'v2.2'
 });
 
-FB.login(function(res){
+FB.getLoginStatus(function(res){
 
-  var authRes;
+  if (res.status === "connected") {
+    init(res.authResponse);
+  } else {
+    login();
+  }
 
-  authRes = res.authResponse;
-
-  init(authRes);
-
-}, {
-  scope: 'user_groups'
 });
+
+function login(){
+  FB.login(function(res){
+    init(res.authResponse);
+  }, {
+    scope: 'user_groups'
+  });
+}
 
 function init(authRes) {
 
@@ -55,6 +61,7 @@ function init(authRes) {
 
       getGroups((groups) => {
         FB.api('/' + req.params.id + '/feed', (res) => {
+          console.log(res);
           this.render(Content, {posts: res, groups: groups});
         });
       });
