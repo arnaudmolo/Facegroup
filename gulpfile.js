@@ -1,6 +1,6 @@
 'use strict';
 
-var gulp, del, path, $, dist, app, browserify, reactify, to5Browserify, fs, envify, exec, brShim;
+var gulp, del, path, $, dist, app, browserify, reactify, to5Browserify, fs, envify, exec, brShim, cssobjectify;
 
 del           = require('del');
 fs            = require('fs');
@@ -14,14 +14,15 @@ browserify    = require('browserify');
 to5Browserify = require('6to5ify');
 envify        = require('envify');
 brShim        = require('browserify-shim');
+cssobjectify  = require('cssobjectify');
 
 dist          = './dist';
 app           = './app/';
 
 // Styles
-gulp.task('styles-', function () {
+gulp.task('styles-sass', function () {
 
-  return gulp.src(app + 'styles/main.sass')
+  return gulp.src(app + 'styles/*.sass')
     .pipe($.plumber())
     .pipe($.rubySass({
       style: 'expanded',
@@ -64,6 +65,7 @@ gulp.task('scripts', function(){
     .transform(to5Browserify.configure({ modules: 'commonInterop', experimental: true}))
     .transform(envify)
     .transform(brShim)
+    .transform(cssobjectify)
     .require(app + 'scripts/main.js', { entry: true })
     .bundle()
     .on('error', function(err){
@@ -165,13 +167,13 @@ gulp.task('bower', function(){
 });
 
 // App watcher
-gulp.task('watch', ['html', 'scripts', 'images', 'styles', 'serve'], function(){
+gulp.task('watch', ['html', 'scripts', 'images', 'styles', 'styles-sass', 'serve'], function(){
 
   // Watch .html files
   gulp.watch(app + '*.html', ['html']);
 
   // Watch .sass
-  gulp.watch(app + 'styles/*.{sass,scss,less}', ['styles']);
+  gulp.watch(app + 'styles/*.{sass,scss,less}', ['styles', 'styles-sass']);
 
   gulp.watch(app + 'scripts/**/*.js', ['scripts']);
 
