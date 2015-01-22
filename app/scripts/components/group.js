@@ -6,10 +6,6 @@ export default React.createClass(
 
   class Group {
 
-    componentDidMount() {
-
-    }
-
     render(){
 
       var posts, data;

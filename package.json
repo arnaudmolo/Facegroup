@@ -58,7 +58,6 @@
     "fb": "global:FB"
   },
   "devDependencies": {
-    "cssobjectify": "^0.2.1",
     "gulp-autoprefixer": "^1.0.1",
     "gulp-less": "^2.0.1",
     "material-ui": "^0.5.0"

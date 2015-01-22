@@ -1,6 +1,6 @@
 'use strict';
 
-var gulp, del, path, $, dist, app, browserify, reactify, to5Browserify, fs, envify, exec, brShim, cssobjectify;
+var gulp, del, path, $, dist, app, browserify, reactify, to5Browserify, fs, envify, exec, brShim;
 
 del           = require('del');
 fs            = require('fs');
@@ -14,7 +14,6 @@ browserify    = require('browserify');
 to5Browserify = require('6to5ify');
 envify        = require('envify');
 brShim        = require('browserify-shim');
-cssobjectify  = require('cssobjectify');
 
 dist          = './dist';
 app           = './app/';
@@ -65,7 +64,6 @@ gulp.task('scripts', function(){
     .transform(to5Browserify.configure({ modules: 'commonInterop', experimental: true}))
     .transform(envify)
     .transform(brShim)
-    .transform(cssobjectify)
     .require(app + 'scripts/main.js', { entry: true })
     .bundle()
     .on('error', function(err){
