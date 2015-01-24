@@ -7,67 +7,10 @@
     <meta name="viewport" content="width=device-width">
     <link rel="shortcut icon" href="/favicon.ico">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-    <!-- build:css(.tmp) /styles/main.css -->
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans:700italic,400,700,800' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.googleapis.com/css?family=Roboto:400,300,500' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="/styles/main.css">
+    <!-- build:css(.tmp) /styles/styles.css -->
+
+    <link rel="stylesheet" href="/styles/styles.css">
     <!-- endbuild -->
-    <style>
-      body {
-        background-color: #45619D;
-      }
-      .spinner {
-        width: 50px;
-        height: 30px;
-        text-align: center;
-        font-size: 10px;
-      }
-
-      .spinner > div {
-        background-color: white;
-        height: 100%;
-        width: 6px;
-        display: inline-block;
-
-        -webkit-animation: stretchdelay 1.2s infinite ease-in-out;
-        animation: stretchdelay 1.2s infinite ease-in-out;
-      }
-
-      .spinner .rect2 {
-        -webkit-animation-delay: -1.1s;
-        animation-delay: -1.1s;
-      }
-
-      .spinner .rect3 {
-        -webkit-animation-delay: -1.0s;
-        animation-delay: -1.0s;
-      }
-
-      .spinner .rect4 {
-        -webkit-animation-delay: -0.9s;
-        animation-delay: -0.9s;
-      }
-
-      .spinner .rect5 {
-        -webkit-animation-delay: -0.8s;
-        animation-delay: -0.8s;
-      }
-
-      @-webkit-keyframes stretchdelay {
-        0%, 40%, 100% { -webkit-transform: scaleY(0.4) }
-        20% { -webkit-transform: scaleY(1.0) }
-      }
-
-      @keyframes stretchdelay {
-        0%, 40%, 100% {
-          transform: scaleY(0.4);
-          -webkit-transform: scaleY(0.4);
-        }  20% {
-          transform: scaleY(1.0);
-          -webkit-transform: scaleY(1.0);
-        }
-      }
-    </style>
   </head>
   <body>
     <!--[if lt IE 10]>
@@ -88,14 +31,13 @@
     <script>
       window.fbAsyncInit = function() {
         (function(d, s, id){
-           var js, fjs = d.getElementsByTagName(s)[0];
-           if (d.getElementById(id)) {return;}
-           js = d.createElement(s); js.id = id;
-           js.src = "/scripts/main.js";
-           fjs.parentNode.insertBefore(js, fjs);
+          var js, fjs = d.getElementsByTagName(s)[0];
+          if (d.getElementById(id)) {return;}
+          js = d.createElement(s); js.id = id;
+          js.src = "/scripts/main.js";
+          fjs.parentNode.insertBefore(js, fjs);
          }(document, 'script', 'bscr'));
       };
     </script>
-
-</body>
+  </body>
 </html>

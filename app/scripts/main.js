@@ -50,7 +50,12 @@ function init(authRes) {
   }
 
   router
+    .route('any', '/*', function(req){
+      console.log("log");
+    })
     .route('index', '/', function(req) {
+
+      this.render(Content, {groups: {data: []}});
 
       getGroups((groups) => {
         this.render(Content, {groups: groups});
@@ -58,6 +63,8 @@ function init(authRes) {
 
     })
     .route('group', '/group/:id', function(req){
+
+      this.render(Content, {groups: {data: []}});
 
       getGroups((groups) => {
         FB.api('/' + req.params.id + '/feed', (res) => {

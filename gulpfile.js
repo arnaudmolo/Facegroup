@@ -165,13 +165,13 @@ gulp.task('bower', function(){
 });
 
 // App watcher
-gulp.task('watch', ['html', 'scripts', 'images', 'styles', 'styles-sass', 'serve'], function(){
+gulp.task('watch', ['html', 'scripts', 'images', 'styles-sass', 'serve'], function(){
 
   // Watch .html files
   gulp.watch(app + '*.html', ['html']);
 
   // Watch .sass
-  gulp.watch(app + 'styles/*.{sass,scss,less}', ['styles', 'styles-sass']);
+  gulp.watch(app + 'styles/*.{sass,scss,less}', ['styles-sass']);
 
   gulp.watch(app + 'scripts/**/*.js', ['scripts']);
 

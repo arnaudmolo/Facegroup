@@ -11,17 +11,15 @@ export default React.createClass(
 
       var groupList, group;
 
-      if (this.props.groups) {
-        groupList = (<GroupList groups={this.props.groups}></GroupList>);
-      };
-
       if (this.props.posts) {
         group = (<Group posts={this.props.posts}></Group>);
       };
 
       return (
         <div>
-          <div>{groupList}</div>
+          <div>
+            <GroupList groups={this.props.groups}></GroupList>
+          </div>
           <div className="page-with-nav-content">{group}</div>
         </div>
       );
