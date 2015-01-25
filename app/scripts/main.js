@@ -50,9 +50,6 @@ function init(authRes) {
   }
 
   router
-    .route('any', '/*', function(req){
-      console.log("log");
-    })
     .route('index', '/', function(req) {
 
       this.render(Content, {groups: {data: []}});
