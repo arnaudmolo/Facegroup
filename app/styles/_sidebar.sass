@@ -1,9 +1,8 @@
 $sidebar-blue: lighten($base-blue, 10%)
 
 .sidebar
-  background-color: $sidebar-blue
-  width: 250px
-  display: inline-block
+  min-width: 250px
+  // display: inline-block
 
 .example-enter
   +bounceInLeft(2s)
@@ -17,15 +16,28 @@ $sidebar-blue: lighten($base-blue, 10%)
   padding: 3px
   float: right
 
+.menu-item-container
+  display: flex
+  flex-direction: column
+
 .menu-item
+  background-color: $sidebar-blue
   font-size: 0.8em
   line-height: 1.5em
   font-weight: lighter
-  height: 60px
   padding-left: 15px
   padding-right: 15px
+  border-top: 1px solid lighten($base-blue, 20%)
+  border-bottom: 1px solid darken($base-blue, 5%)
+  transition: all 0.3s ease
+  &:hover
+    background-color: darken($base-blue, 5%)
+    padding-left: 25px
 
   a
     color: white
     text-transform: none
     text-decoration: none
+
+    display: block
+    padding: 15px 0

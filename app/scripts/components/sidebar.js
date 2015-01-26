@@ -1,11 +1,11 @@
 import React from 'react/addons';
-import Sidebar from './sidebar/sidebar'
+import GroupList from './sidebar/group-list';
 
 var { CSSTransitionGroup } = React.addons;
 
 export default React.createClass(
 
-  class GroupList {
+  class Sidebar {
 
     getInitialState() {
       return {
@@ -19,16 +19,15 @@ export default React.createClass(
 
     render(){
 
-      var sideBar;
+      var groupList;
 
       if (this.state.mounted) {
-        sideBar =
-          <Sidebar items={this.props.groups.data} />
+        groupList = <GroupList items={this.props.groups.data} />
       }
 
       return (
         <CSSTransitionGroup transitionName="example">
-          {sideBar}
+          {groupList}
         </CSSTransitionGroup>
       );
     }

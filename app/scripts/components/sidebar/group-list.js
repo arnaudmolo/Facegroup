@@ -3,7 +3,8 @@ import _ from 'lodash';
 
 export default React.createClass(
 
-  class Sidebar {
+  class GroupList {
+
     render() {
 
       var itemsList;
@@ -30,7 +31,7 @@ export default React.createClass(
         });
 
       return (
-        <div className="sidebar">
+        <div className="menu-item-container">
             { itemsList }
         </div>
       );
