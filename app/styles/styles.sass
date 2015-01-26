@@ -4,12 +4,15 @@
 @import compass/reset
 @import compass/css3/animation.scss
 
+@import hmps-animate.scss/animate.scss
+
 +establish-baseline()
 
 html
   font-size: 125%
   font-family: Helvetica, Arial, 'lucida grande', tahoma, verdana, arial, sans-serif
   box-sizing: border-box
+  background-color: $grey
 
 *, *:before, *:after
   box-sizing: inherit
@@ -17,3 +20,8 @@ html
 @import avatar
 @import spinner
 @import sidebar
+@import group
+
+a
+  text-decoration: none
+  color: $base-blue

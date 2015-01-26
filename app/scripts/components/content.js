@@ -9,10 +9,10 @@ export default React.createClass(
 
     render() {
 
-      var groupList, group;
+      var groupList, posts;
 
       if (this.props.posts) {
-        group = (<Group posts={this.props.posts}></Group>);
+        posts = (<Group posts={this.props.posts}></Group>);
       };
 
       return (
@@ -20,7 +20,9 @@ export default React.createClass(
           <div>
             <GroupList groups={this.props.groups}></GroupList>
           </div>
-          <div className="page-with-nav-content">{group}</div>
+          <div className="page-with-nav-content">
+            <div className="posts-container">{posts}</div>
+          </div>
         </div>
       );
 

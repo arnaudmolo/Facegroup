@@ -1,0 +1,57 @@
+.page-with-nav-content
+  background-color: $base-blue
+  padding-left: 250px
+  display: inline-block
+
+.post
+  background-color: white
+  margin-top: 40px
+  margin-bottom: 40px
+  padding: 20px
+
+  .post-time
+    font-size: 0.7em
+    a
+      color: darken($grey, 20%)
+
+  header
+    position: relative
+
+    .post-time
+      float: right
+
+    .avatar-container
+      position: relative
+      left: -30px
+      top: -30px
+
+    .avatar-caption, .avatar-name
+      display: inline-block
+
+    .avatar-name
+      position: relative
+      top: 17px
+      left: 15px
+      vertical-align: top
+
+
+.posts-container
+  max-width: 800px
+  margin: 0 auto
+
+.comments-container
+  background-color: $grey
+  font-size: 0.8em
+
+.comment-container
+  border-bottom: 1px solid darken($grey, 10%)
+  border-top: 1px solid lighten($grey, 10%)
+
+.comment-avatar
+  display: inline-block
+
+.comment
+  display: inline-block
+
+  .post-time
+    padding-left: 5px

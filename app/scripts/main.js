@@ -34,16 +34,21 @@ function login(){
 
 function init(authRes) {
 
-  var groups;
+  var store;
+
+  store = JSON.parse(localStorage.getItem('store'));
+
+  Object.observe(store, function(changes) {
+    localStorage.setItem('store', JSON.stringify(store));
+  });
 
   function getGroups(cb) {
 
-    if (groups) {
-      return cb(groups);
+    if (store.groups.data.length) {
+      return cb(store.groups);
     };
 
     FB.api('/me?fields=groups', (res) => {
-      groups = res.groups;
       cb(res.groups);
     });
 
@@ -52,7 +57,7 @@ function init(authRes) {
   router
     .route('index', '/', function(req) {
 
-      this.render(Content, {groups: {data: []}});
+      this.render(Content, store);
 
       getGroups((groups) => {
         this.render(Content, {groups: groups});
@@ -61,12 +66,21 @@ function init(authRes) {
     })
     .route('group', '/group/:id', function(req){
 
-      this.render(Content, {groups: {data: []}});
+      this.render(Content, store);
+
+      FB.api('/' + req.params.id + '/feed', (res) => {
+        store.posts = res;
+        this.render(Content, store);
+      });
+
+      FB.api(`/${req.params.id}`, (res) => {
+        store.groupInfo = res;
+        this.render(Content, store);
+      })
 
       getGroups((groups) => {
-        FB.api('/' + req.params.id + '/feed', (res) => {
-          this.render(Content, {posts: res, groups: groups});
-        });
+        store.groups = groups;
+        this.render(Content, store);
       });
 
     })

@@ -26,7 +26,7 @@ gulp.task('styles-sass', function () {
     .pipe($.rubySass({
       style: 'expanded',
       precision: 10,
-      // loadPath: ['./front/bower_components'],
+      loadPath: ['./bower_components', 'node_modules'],
       compass: true
     }))
     .pipe(gulp.dest(dist + '/styles/'))

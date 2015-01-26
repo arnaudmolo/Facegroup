@@ -1,5 +1,6 @@
 import React from 'react/addons';
 import Avatar from './avatar';
+import moment from 'moment';
 
 export default React.createClass(
 
@@ -12,7 +13,7 @@ export default React.createClass(
     }
 
     handleShowMore() {
-      this.setState({nbPosts: this.state.nbPosts + 5})
+      this.setState({nbPosts: this.state.nbPosts + 5});
     }
 
     render() {
@@ -27,17 +28,37 @@ export default React.createClass(
       rest = comments.length - 1 - limit;
 
       for (var i = 0; i <= limit; i++) {
+
+        let from, comment;
+
+        comment = comments[i];
+        from = comment.from;
+
         commentsList.push(
-          <li key={comments[i].id}>
-            <Avatar user={comments[i].from}></Avatar>
-            <p>{comments[i].message}</p>
+          <li key={comments[i].id} className="comment-container">
+            <div className="comment-avatar">
+              <Avatar user={from} name={false}></Avatar>
+            </div>
+            <div className="comment">
+              <p className="comment-name">
+                <a href={'https://www.facebook.com/-' + from.id} target="_blank">{from.name}</a>
+                <time className="post-time">
+                  <a
+                    href={'https://www.facebook.com/' + comment.id + '/'}
+                    target="_blank">
+                      {moment(comment.created_time).fromNow()}
+                  </a>
+                </time>
+              </p>
+              <p>{comments[i].message}</p>
+            </div>
           </li>
         );
       };
 
       return (
         <div>
-          <ul>{commentsList}</ul>
+          <ul className="comments-container">{commentsList}</ul>
           {rest?<span onClick={this.handleShowMore}>Show more</span>:undefined}
         </div>
       );
