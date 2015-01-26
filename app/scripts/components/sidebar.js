@@ -9,12 +9,19 @@ export default React.createClass(
 
     getInitialState() {
       return {
-        mounted: false
-      }
+        mounted: false,
+        hidden: false
+      };
     }
 
     componentDidMount() {
       this.setState({mounted: true});
+    }
+
+    handleHide() {
+      this.setState({
+        hidden: !this.state.hidden
+      });
     }
 
     render(){
@@ -22,7 +29,11 @@ export default React.createClass(
       var groupList;
 
       if (this.state.mounted) {
-        groupList = <GroupList items={this.props.groups.data} />
+        groupList =
+          <div className={'sidebar-container ' + (this.state.hidden?'hidden':'')}>
+            <button className="sidebar-toggler" onClick={this.handleHide}>x</button>
+            <GroupList items={this.props.groups.data} />
+          </div>
       }
 
       return (

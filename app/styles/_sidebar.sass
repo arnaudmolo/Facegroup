@@ -1,8 +1,22 @@
 $sidebar-blue: lighten($base-blue, 10%)
 
-.sidebar
+.sidebar-container
   min-width: 250px
-  // display: inline-block
+  transition: margin-left 0.5s ease
+  position: relative
+  &.hidden
+    margin-left: -250px
+
+.sidebar-toggler
+  position: absolute
+  right: -25px
+  top: -1px
+  background-color: $sidebar-blue
+  border: none
+  border-radius: 0 0 15% 0
+  color: white
+  font-size: 1.5em
+  border-top: 2px solid lighten($base-blue, 20%)
 
 .example-enter
   +bounceInLeft(2s)

@@ -4,6 +4,7 @@ import Types from './facebook-types';
 import Avatar from './avatar';
 import Comments from './comments';
 import moment from 'moment';
+import Autolinker from 'autolinker';
 
 export default React.createClass(
 
@@ -34,7 +35,11 @@ export default React.createClass(
             </time>
           </header>
           <section>
-            <h3>{ post.message }</h3>
+            {
+              post.message?
+                <h3 dangerouslySetInnerHTML={{__html: Autolinker.link(post.message)}} />:
+                undefined
+            }
             <Type post={post}></Type>
           </section>
           <footer className="comments-container">
