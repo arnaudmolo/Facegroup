@@ -10,7 +10,8 @@ export default React.createClass(
     getInitialState() {
       return {
         mounted: false,
-        hidden: false
+        hidden: false,
+        width: 200
       };
     }
 
@@ -18,10 +19,12 @@ export default React.createClass(
       this.setState({mounted: true});
     }
 
-    handleHide() {
-      this.setState({
-        hidden: !this.state.hidden
-      });
+    handleResize(e) {
+      if (e.pageX) {
+        this.setState({
+          width: e.pageX
+        });
+      };
     }
 
     render(){
@@ -30,16 +33,16 @@ export default React.createClass(
 
       if (this.state.mounted) {
         groupList =
-          <div className={'sidebar-container ' + (this.state.hidden?'hidden':'')}>
-            <button className="sidebar-toggler" onClick={this.handleHide}>x</button>
             <GroupList items={this.props.groups.data} />
-          </div>
       }
 
       return (
-        <CSSTransitionGroup transitionName="example">
-          {groupList}
-        </CSSTransitionGroup>
+        <div className="sidebar-container" style={{width: this.state.width}}>
+          <CSSTransitionGroup transitionName="example">
+            <div className="resize-bar" onClick={this.handleDragStart} onDrag={this.handleResize} draggable></div>
+            {groupList}
+          </CSSTransitionGroup>
+        </div>
       );
     }
 

@@ -1,23 +1,5 @@
 $sidebar-blue: lighten($base-blue, 10%)
 
-.sidebar-container
-  min-width: 250px
-  transition: margin-left 0.5s ease
-  position: relative
-  &.hidden
-    margin-left: -250px
-
-.sidebar-toggler
-  position: absolute
-  right: -25px
-  top: -1px
-  background-color: $sidebar-blue
-  border: none
-  border-radius: 0 0 15% 0
-  color: white
-  font-size: 1.5em
-  border-top: 2px solid lighten($base-blue, 20%)
-
 .example-enter
   +bounceInLeft(2s)
 
@@ -28,7 +10,6 @@ $sidebar-blue: lighten($base-blue, 10%)
   background-color: rgba(0, 0, 0, 0.5)
   border-radius: 10%
   padding: 3px
-  float: right
 
 .menu-item-container
   display: flex
@@ -44,6 +25,10 @@ $sidebar-blue: lighten($base-blue, 10%)
   border-top: 1px solid lighten($base-blue, 20%)
   border-bottom: 1px solid darken($base-blue, 5%)
   transition: all 0.3s ease
+  height: 56px
+  text-overflow: ellipsis
+  white-space: nowrap
+  overflow: hidden
   &:hover
     background-color: darken($base-blue, 5%)
     padding-left: 25px
@@ -55,3 +40,16 @@ $sidebar-blue: lighten($base-blue, 10%)
 
     display: block
     padding: 15px 0
+
+.resize-bar
+  width: 4px
+  height: 2000px
+  background-color: darken($base-blue, 50%)
+
+  cursor: ew-resize
+
+  position: absolute
+  right: 0
+
+.sidebar-container
+  position: relative

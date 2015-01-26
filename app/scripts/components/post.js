@@ -43,7 +43,7 @@ export default React.createClass(
             <Type post={post}></Type>
           </section>
           <footer className="comments-container">
-            {post.comments !== undefined ? <Comments comments={post.comments}></Comments>:undefined}
+            {post.comments !== undefined ? <Comments comments={post.comments} postId={post.id}></Comments>:undefined}
           </footer>
         </div>
       );

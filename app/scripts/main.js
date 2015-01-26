@@ -75,8 +75,9 @@ function init(authRes) {
 
       FB.api(`/${req.params.id}`, (res) => {
         store.groupInfo = res;
+        console.log(res);
         this.render(Content, store);
-      })
+      });
 
       getGroups((groups) => {
         store.groups = groups;
