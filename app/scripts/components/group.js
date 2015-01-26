@@ -18,7 +18,9 @@ export default React.createClass(
         );
       });
 
-      return (<div>{ posts }</div>);
+      return (
+        <div>{ posts }</div>
+      );
     }
 
   }.prototype

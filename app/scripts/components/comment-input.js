@@ -32,6 +32,15 @@ export default React.createClass(
           }
       );
 
+      // FB.api(
+      //     '/878677622152887/feed',
+      //     'POST',
+      //     {message: 'on peut meme poster'},
+      //     function(response) {
+      //       console.log(response);
+      //     }
+      // );
+
     }
 
     render() {
