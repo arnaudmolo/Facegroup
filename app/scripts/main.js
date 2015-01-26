@@ -28,7 +28,7 @@ function login(){
   FB.login(function(res){
     init(res.authResponse);
   }, {
-    scope: 'user_groups'
+    scope: ['user_groups', 'publish_actions', 'manage_notifications']
   });
 }
 

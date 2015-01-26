@@ -2,6 +2,7 @@ import React from 'react/addons';
 import Avatar from './avatar';
 import moment from 'moment';
 import FB from 'fb';
+import CommentInput from './comment-input';
 
 export default React.createClass(
 
@@ -15,28 +16,6 @@ export default React.createClass(
 
     handleShowMore() {
       this.setState({nbPosts: this.state.nbPosts + 5});
-    }
-
-    handleSubmit(event) {
-
-      event.preventDefault();
-
-      console.log();
-
-      FB.api(
-          '/' + this.props.postId + '/comments',
-          'POST',
-          {
-              "message": "This is a test comment"
-          },
-          function (response) {
-            console.log(response);
-            if (response && !response.error) {
-              /* handle the result */
-            }
-          }
-      );
-
     }
 
     render() {
@@ -83,9 +62,7 @@ export default React.createClass(
         <div>
           <ul className="comments-container">{commentsList}</ul>
           {rest?<span onClick={this.handleShowMore}>Show more</span>:undefined}
-          <form onSubmit={this.handleSubmit}>
-            <input type="text"/>
-          </form>
+          <CommentInput postId={this.props.postId} />
         </div>
       );
 

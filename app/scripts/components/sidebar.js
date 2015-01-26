@@ -27,19 +27,24 @@ export default React.createClass(
       };
     }
 
+    handleFilter(e) {
+      console.log(e);
+    }
+
     render(){
 
       var groupList;
 
       if (this.state.mounted) {
         groupList =
-            <GroupList items={this.props.groups.data} />
+            <GroupList items={this.props.groups.data}/>
       }
 
       return (
         <div className="sidebar-container" style={{width: this.state.width}}>
           <CSSTransitionGroup transitionName="example">
             <div className="resize-bar" onClick={this.handleDragStart} onDrag={this.handleResize} draggable></div>
+            <input type="text" onKeyPress={this.handleFilter}/>
             {groupList}
           </CSSTransitionGroup>
         </div>
