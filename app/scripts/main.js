@@ -1,12 +1,15 @@
+require("6to5/polyfill");
+
 import React from 'react/addons';
 import FB from 'fb';
 
-import { app_id } from './constant';
+import { app_id } from './constants/constant';
 import router from './router';
 import Login from './components/login';
-import Content from './components/content';
+import Content from './components/content.jsx';
+import GroupWebAPIUtils from './utils/group_web_api_utils';
 
-var init;
+window.React = React;
 
 FB.init({
   appId      : app_id,
@@ -15,13 +18,11 @@ FB.init({
 });
 
 FB.getLoginStatus(function(res){
-
   if (res.status === "connected") {
     init(res.authResponse);
   } else {
     login();
   }
-
 });
 
 function login(){
@@ -34,56 +35,19 @@ function login(){
 
 function init(authRes) {
 
-  var store;
-
-  store = JSON.parse(localStorage.getItem('store'));
-
-  Object.observe(store, function(changes) {
-    localStorage.setItem('store', JSON.stringify(store));
-  });
-
-  function getGroups(cb) {
-
-    if (store.groups.data.length) {
-      return cb(store.groups);
-    };
-
-    FB.api('/me?fields=groups', (res) => {
-      cb(res.groups);
-    });
-
-  }
+  React.render(
+      Content(),
+      document.getElementsByClassName('content')[0]
+  );
 
   router
     .route('index', '/', function(req) {
-
-      this.render(Content, store);
-
-      getGroups((groups) => {
-        this.render(Content, {groups: groups});
-      });
-
+      GroupWebAPIUtils
+        .getAllGroups();
     })
     .route('group', '/group/:id', function(req){
-
-      this.render(Content, store);
-
-      FB.api('/' + req.params.id + '/feed', (res) => {
-        store.posts = res;
-        this.render(Content, store);
-      });
-
-      FB.api(`/${req.params.id}`, (res) => {
-        store.groupInfo = res;
-        console.log(res);
-        this.render(Content, store);
-      });
-
-      getGroups((groups) => {
-        store.groups = groups;
-        this.render(Content, store);
-      });
-
+      GroupWebAPIUtils
+        .getAllPosts(req.params.id);
     })
     .attach(document.getElementsByClassName('content')[0])
     .captureClicks();

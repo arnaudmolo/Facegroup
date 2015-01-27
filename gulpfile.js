@@ -173,7 +173,7 @@ gulp.task('watch', ['html', 'scripts', 'images', 'styles-sass', 'serve'], functi
   // Watch .sass
   gulp.watch(app + 'styles/*.{sass,scss,less}', ['styles-sass']);
 
-  gulp.watch(app + 'scripts/**/*.js', ['scripts']);
+  gulp.watch(app + 'scripts/**/*.{js,jsx}', ['scripts']);
 
   gulp.watch(app + 'images/**/*', ['images']);
 

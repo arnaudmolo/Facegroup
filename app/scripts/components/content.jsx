@@ -1,10 +1,31 @@
 import React from 'react/addons';
-import Sidebar from './sidebar';
+
+import GroupStore from './../stores/group-store';
+
+import Sidebar from './sidebar.jsx';
 import Group from './group';
+
+function getStateFromStores() {
+  return {
+    groups: GroupStore.getAll()
+  };
+}
 
 export default React.createClass(
 
   class Content {
+
+    getInitialState() {
+      return getStateFromStores();
+    }
+
+    componentDidMount() {
+      GroupStore.addChangeListener(this._onChange);
+    }
+
+    _onChange() {
+      this.setState(getStateFromStores());
+    }
 
     render() {
 
@@ -17,7 +38,7 @@ export default React.createClass(
       return (
         <div className="application-container">
           <div className="sidebar">
-            <Sidebar groups={this.props.groups} />
+            <Sidebar groups={this.state.groups} />
           </div>
           <div className="page-with-nav-content">
             <div className="posts-container">{posts}</div>

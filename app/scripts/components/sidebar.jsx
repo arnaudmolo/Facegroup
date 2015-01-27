@@ -1,5 +1,5 @@
 import React from 'react/addons';
-import GroupList from './sidebar/group-list';
+import GroupList from './sidebar/group-list.jsx';
 
 var { CSSTransitionGroup } = React.addons;
 
@@ -37,7 +37,7 @@ export default React.createClass(
 
       if (this.state.mounted) {
         groupList =
-            <GroupList items={this.props.groups.data}/>
+            <GroupList items={this.props.groups}/>
       }
 
       return (
