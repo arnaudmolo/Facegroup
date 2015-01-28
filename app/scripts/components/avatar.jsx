@@ -1,23 +1,23 @@
 import React from 'react/addons';
 
-export default React.createClass(
+export default class Avatar extends React.Component {
 
-  class Avatar {
+  static test = 'this is a test';
 
-    render(){
+  render(){
 
-      var user;
+    console.log(this.test);
 
-      user = this.props.user;
+    var user;
 
-      return (
-        <a href={'https://www.facebook.com/-' + user.id} target="_blank" className="avatar-container">
-          {this.props.avatar !== false ? <img className="avatar-caption" src={'http://graph.facebook.com/' + user.id + '/picture?type=square'}></img> : undefined}
-          {this.props.name !== false ? <p className="avatar-name">{user.name}</p>:undefined}
-        </a>
-      );
-    }
+    user = this.props.user;
 
-  }.prototype
+    return (
+      <a href={'https://www.facebook.com/-' + user.id} target="_blank" className="avatar-container">
+        {this.props.avatar !== false ? <img className="avatar-caption" src={'http://graph.facebook.com/' + user.id + '/picture?type=square'}></img> : undefined}
+        {this.props.name !== false ? <p className="avatar-name">{user.name}</p>:undefined}
+      </a>
+    );
+  }
 
-);
+}
