@@ -1,9 +1,10 @@
 import React from 'react/addons';
-import Types from './facebook-types';
-import Avatar from './avatar';
-import Comments from './comments';
 import moment from 'moment';
 import Autolinker from 'autolinker';
+
+import Types from './facebook-types';
+import Avatar from './avatar.jsx';
+import Comments from './comments.jsx';
 
 export default React.createClass(
 

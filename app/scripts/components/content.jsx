@@ -1,13 +1,15 @@
 import React from 'react/addons';
 
 import GroupStore from './../stores/group-store';
+import PostStore from './../stores/post-store';
 
 import Sidebar from './sidebar.jsx';
-import Group from './group';
+import Group from './group.jsx';
 
 function getStateFromStores() {
   return {
-    groups: GroupStore.getAll()
+    groups: GroupStore.getAll(),
+    posts: PostStore.getPostsForCurrentGroup()
   };
 }
 
@@ -21,6 +23,7 @@ export default React.createClass(
 
     componentDidMount() {
       GroupStore.addChangeListener(this._onChange);
+      PostStore.addChangeListener(this._onChange);
     }
 
     _onChange() {
@@ -31,8 +34,8 @@ export default React.createClass(
 
       var posts;
 
-      if (this.props.posts) {
-        posts = (<Group posts={this.props.posts} />);
+      if (this.state.posts) {
+        posts = (<Group posts={this.state.posts} />);
       }
 
       return (

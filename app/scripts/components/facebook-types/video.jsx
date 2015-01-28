@@ -13,4 +13,3 @@ export default React.createClass(
   }.prototype
 
 );
-

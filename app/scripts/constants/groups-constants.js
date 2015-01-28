@@ -11,7 +11,9 @@ export default Object.freeze({
     RECEIVE_RAW_POSTS: null,
 
     RECEIVE_RAW_CREATED_GROUP: null,
-    RECEIVE_RAW_GROUPS: null
+    RECEIVE_RAW_GROUPS: null,
+
+    CHANGE_GROUP: null
 
   }),
   PayloadSources: keyMirror({

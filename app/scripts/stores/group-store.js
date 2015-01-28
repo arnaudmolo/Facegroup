@@ -1,8 +1,8 @@
 import AppDispatcher from './../dispatcher/app-dispatcher';
 import { EventEmitter } from 'events';
-import { ActionTypes } from './../constants/groups-constants';
+import { ActionTypes, PayloadSources } from './../constants/groups-constants';
 
-var GroupStore, CHANGE_EVENT, _groups;
+var GroupStore, CHANGE_EVENT, _groups, _currentId;
 
 CHANGE_EVENT = 'change';
 
@@ -32,18 +32,33 @@ export default GroupStore = Object.assign({}, EventEmitter.prototype, {
 
   removeChangeListener(callback) {
     this.removeListener(CHANGE_EVENT, callback);
+  },
+
+  getCurrentId(){
+    return _currentId;
   }
 
 });
 
 GroupStore.dispatchToken = AppDispatcher.register(function(payload) {
 
-  switch(payload.action.type) {
+  if (payload.source === PayloadSources.SERVER_ACTION) {
 
-    case ActionTypes.RECEIVE_RAW_GROUPS:
-      createAll(payload.action.rawGroups.groups.data);
-      GroupStore.emitChange();
+    switch(payload.action.type) {
+      case ActionTypes.RECEIVE_RAW_GROUPS:
+        createAll(payload.action.rawGroups.groups.data);
+        GroupStore.emitChange();
+    }
 
   }
+
+  if (payload.source === PayloadSources.VIEW_ACTION) {
+
+    switch(payload.action.type) {
+      case ActionTypes.CHANGE_GROUP:
+        _currentId = payload.action.id;
+    }
+
+  };
 
 });

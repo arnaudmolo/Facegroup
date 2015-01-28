@@ -1,5 +1,5 @@
 import React from 'react/addons';
-import Post from './post';
+import Post from './post.jsx';
 
 export default React.createClass(
 
@@ -9,7 +9,7 @@ export default React.createClass(
 
       var posts, data;
 
-      data = this.props.posts.data;
+      data = this.props.posts;
 
       posts = data.map(function(d){
         return (

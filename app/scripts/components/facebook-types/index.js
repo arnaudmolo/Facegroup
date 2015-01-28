@@ -1,7 +1,7 @@
-import link from './link';
-import messages from './message';
-import photo from './photo';
-import status from './status';
-import video from './video';
+import link from './link.jsx';
+import messages from './message.jsx';
+import photo from './photo.jsx';
+import status from './status.jsx';
+import video from './video.jsx';
 
 export {link, messages, photo, status, video};

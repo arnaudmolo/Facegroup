@@ -1,6 +1,7 @@
 import AppDispatcher from './../dispatcher/app-dispatcher';
 import { EventEmitter } from 'events';
 import { ActionTypes } from './../constants/groups-constants';
+import GroupStore from './group-store';
 
 var PostStore, CHANGE_EVENT, _posts;
 
@@ -8,16 +9,13 @@ CHANGE_EVENT = 'change';
 
 _posts = {};
 
-function create(post) {
-  _posts[post.id] = post;
+function create(rawPost) {
+  rawPost.groupId = rawPost.to.data[0].id;
+  _posts[rawPost.id] = rawPost;
 }
 
 function createAll(rawPosts) {
   rawPosts.forEach(create);
-}
-
-function destroy(id) {
-  delete _posts[id];
 }
 
 export default PostStore = Object.assign({}, EventEmitter.prototype, {
@@ -36,18 +34,35 @@ export default PostStore = Object.assign({}, EventEmitter.prototype, {
 
   removeChangeListener(callback) {
     this.removeListener(CHANGE_EVENT, callback);
+  },
+
+  getPostsForCurrentGroup() {
+
+    var res;
+
+    res = [];
+
+    Object.keys(_posts).forEach(function(d){
+      if (_posts[d].groupId === GroupStore.getCurrentId()) {
+        res.push(_posts[d]);
+      };
+    });
+
+    return res;
   }
 
 });
 
 PostStore.dispatchToken = AppDispatcher.register(function(payload) {
 
-  var text;
+  var action;
 
-  console.log('azeazeazeazeazeazeaze', payload);
+  action = payload.action;
 
-  switch(payload.actionType) {
-
+  switch(action.type) {
+    case ActionTypes.RECEIVE_RAW_POSTS:
+      createAll(action.rawPosts.data);
+      PostStore.emitChange();
   }
 
 });

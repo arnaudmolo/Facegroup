@@ -1,7 +1,7 @@
 import React from 'react/addons';
-import Avatar from './avatar';
 import moment from 'moment';
-import CommentInput from './comment-input';
+import Avatar from './avatar.jsx';
+import CommentInput from './comment-input.jsx';
 
 export default React.createClass(
 

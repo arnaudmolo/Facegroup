@@ -6,6 +6,7 @@ import { app_id } from './constants/constant';
 import router from './router';
 import Content from './components/content.jsx';
 import GroupWebAPIUtils from './utils/group_web_api_utils';
+import GroupsActions from './actions/group-actions';
 
 window.React = React;
 
@@ -18,8 +19,20 @@ function init() {
   GroupWebAPIUtils
     .getAllGroups();
 
+  var renderer = (function() {
+    console.log(this);
+  }).bind(router);
+
+  console.log(renderer());
+
   router
     .route('group', '/group/:id', function(req){
+
+      console.log(this);
+
+      GroupsActions
+        .changeCurrentGroup(req.params.id);
+
       GroupWebAPIUtils
         .getGroupPosts(req.params.id);
     })
@@ -48,23 +61,3 @@ FB.getLoginStatus(function(res){
     login();
   }
 });
-
-import { EventEmitter } from 'events';
-
-console.log(Object.assign(EventEmitter.prototype, {
-  ok() {
-
-  }
-}));
-
-console.log(Object.assign({}, EventEmitter.prototype, {
-  ok() {
-
-  }
-}));
-
-console.log(Object.assign({
-  ok() {
-
-  }
-}, EventEmitter.prototype));
