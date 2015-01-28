@@ -1,7 +1,6 @@
 import React from 'react/addons';
 import Avatar from './avatar';
 import moment from 'moment';
-import FB from 'fb';
 import CommentInput from './comment-input';
 
 export default React.createClass(
@@ -11,7 +10,7 @@ export default React.createClass(
     getInitialState() {
       return {
         nbPosts: 5
-      }
+      };
     }
 
     handleShowMore() {
@@ -56,7 +55,7 @@ export default React.createClass(
             </div>
           </li>
         );
-      };
+      }
 
       return (
         <div>

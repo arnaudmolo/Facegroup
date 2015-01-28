@@ -29,11 +29,11 @@ export default React.createClass(
 
     render() {
 
-      var groupList, posts;
+      var posts;
 
       if (this.props.posts) {
         posts = (<Group posts={this.props.posts} />);
-      };
+      }
 
       return (
         <div className="application-container">

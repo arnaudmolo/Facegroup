@@ -1,43 +1,44 @@
 import AppDispatcher from './../dispatcher/app-dispatcher';
-import {ActionTypes} from './../constants/groups-constants';
+import { ActionTypes } from './../constants/groups-constants';
 
 export default {
 
   receiveAllComments(rawComments) {
 
-    AppDispatcher.handleServerAction({
-      type: ActionTypes.RECEIVE_RAW_COMMENTS,
-      rawComments: rawComments
-    });
+    AppDispatcher
+      .handleServerAction({
+        type: ActionTypes.RECEIVE_RAW_COMMENTS,
+        rawComments
+      });
 
   },
 
-  receiveCreatedComment(createdComment) {
+  receiveCreatedComment(rawComment) {
 
-    AppDispatcher.handleServerAction({
-      type: ActionTypes.RECEIVE_RAW_CREATED_COMMENTS,
-      rawComment: createdComment
-    });
+    AppDispatcher
+      .handleServerAction({
+        type: ActionTypes.RECEIVE_RAW_CREATED_COMMENTS,
+        rawComment
+      });
 
   },
 
   receiveAllPosts(rawPosts) {
 
-    console.log('rawPosts', rawPosts);
-
     AppDispatcher
       .handleServerAction({
         type: ActionTypes.RECEIVE_RAW_POSTS,
-        rawPosts: rawPosts
+        rawPosts
       });
+
   },
 
-  receiveCreatedPost(createdPost) {
+  receiveCreatedPost(rawPost) {
 
     AppDispatcher
       .handleServerAction({
         type: ActionTypes.RECEIVE_RAW_CREATED_POST,
-        rawPost: createdPost
+        rawPost
       });
 
   },
@@ -48,10 +49,8 @@ export default {
       .handleServerAction({
         type: ActionTypes.RECEIVE_RAW_GROUPS,
         rawGroups
-      })
-
+      });
 
   }
 
-}
-
+};

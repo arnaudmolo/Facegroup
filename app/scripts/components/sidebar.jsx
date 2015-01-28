@@ -24,7 +24,7 @@ export default React.createClass(
         this.setState({
           width: e.pageX
         });
-      };
+      }
     }
 
     handleFilter(e) {
@@ -37,7 +37,7 @@ export default React.createClass(
 
       if (this.state.mounted) {
         groupList =
-            <GroupList items={this.props.groups}/>
+            (<GroupList items={this.props.groups}/>);
       }
 
       return (

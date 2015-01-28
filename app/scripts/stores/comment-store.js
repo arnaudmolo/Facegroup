@@ -15,11 +15,11 @@ function _addComments(rawComments) {
   rawComments.forEach(function(comment) {
     if (!_comments[comment.id]) {
       _comments[comment.id] = convertRawComment(comment);
-    };
+    }
   });
 }
 
-export CommentStore = Object.assign({}, EventEmitter.prototype, {
+export default CommentStore = Object.assign({}, EventEmitter.prototype, {
 
   emitChange() {
     this.emit(CHANGE_EVENT);
@@ -44,7 +44,7 @@ export CommentStore = Object.assign({}, EventEmitter.prototype, {
     for (var id in _comments) {
       if (_comments[id].postId === postId) {
         postMessages.push(_comments[id]);
-      };
+      }
     }
 
     postMessages.sort(function(a, b) {
@@ -68,8 +68,7 @@ export CommentStore = Object.assign({}, EventEmitter.prototype, {
     return {
       id: 'c_' + timestamp,
       postId: postId
-    }
-
+    };
   }
 
 });

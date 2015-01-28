@@ -1,5 +1,6 @@
 import AppDispatcher from './../dispatcher/app-dispatcher';
 import { EventEmitter } from 'events';
+import { ActionTypes } from './../constants/groups-constants';
 
 var PostStore, CHANGE_EVENT, _posts;
 
@@ -7,30 +8,19 @@ CHANGE_EVENT = 'change';
 
 _posts = {};
 
-function create(id, text) {
-
-  _posts[id] = {
-    id: id,
-    text: text
-  }
-
+function create(post) {
+  _posts[post.id] = post;
 }
 
-function update(id, updates) {
-  _posts[id] = Object.assign({}, _posts[id], updates);
-}
-
-function updateAll(updates) {
-  for (var id in _posts) {
-    update(id, updates);
-  }
+function createAll(rawPosts) {
+  rawPosts.forEach(create);
 }
 
 function destroy(id) {
   delete _posts[id];
 }
 
-export default PostStore = Object.assign({}, EventEmitter, {
+export default PostStore = Object.assign({}, EventEmitter.prototype, {
 
   getAll() {
     return _posts;
@@ -50,23 +40,14 @@ export default PostStore = Object.assign({}, EventEmitter, {
 
 });
 
-AppDispatcher.register(function(action) {
+PostStore.dispatchToken = AppDispatcher.register(function(payload) {
 
   var text;
 
-  switch(action.actionType) {
-    case PostConstant.POST_CREATE:
-      text = action.text.trim();
-      if (text !== '') {
-        create(text);
-      };
-      PostStore.emitChange();
-      break;
+  console.log('azeazeazeazeazeazeaze', payload);
 
-    case PostConstant.POST_DESTROY:
-      destroy(action.id);
-      PostStore.emitChange();
-      break;
+  switch(payload.actionType) {
+
   }
 
 });

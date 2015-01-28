@@ -13,9 +13,7 @@ function create(group) {
 }
 
 function createAll(rawGroups) {
-  rawGroups.forEach(function(group) {
-    create(group);
-  });
+  rawGroups.forEach(create);
 }
 
 export default GroupStore = Object.assign({}, EventEmitter.prototype, {

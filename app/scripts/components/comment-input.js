@@ -1,4 +1,5 @@
 import React from 'react/addons';
+import FB from 'fb';
 
 export default React.createClass(
 

@@ -1,5 +1,4 @@
 import React from 'react/addons';
-import FB from 'fb';
 import Types from './facebook-types';
 import Avatar from './avatar';
 import Comments from './comments';
@@ -12,7 +11,7 @@ export default React.createClass(
 
     render() {
 
-      var post, comments, Type;
+      var post, Type;
 
       post = this.props.post;
 
@@ -20,7 +19,7 @@ export default React.createClass(
 
       if (Type === undefined) {
         console.error('Type doesn\'t match any facebook type');
-      };
+      }
 
       return (
         <div className="post">

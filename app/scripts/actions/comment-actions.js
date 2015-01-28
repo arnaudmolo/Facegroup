@@ -6,7 +6,7 @@ export class CommentActions {
   create(comment) {
     AppDispatcher.dispatch({
       actionType: CommentConstant.COMMENT_CREATE,
-      text: text
+      text: comment.text
     });
   }
 

@@ -1,5 +1,4 @@
 import React from 'react/addons';
-import FB from 'fb';
 import Post from './post';
 
 export default React.createClass(
@@ -12,7 +11,7 @@ export default React.createClass(
 
       data = this.props.posts.data;
 
-      posts = data.map(function(d, i){
+      posts = data.map(function(d){
         return (
           <Post key={d.id} post={d}></Post>
         );

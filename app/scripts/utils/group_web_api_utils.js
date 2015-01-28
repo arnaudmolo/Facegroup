@@ -3,7 +3,7 @@ import FB from 'fb';
 
 export default {
 
-  getAllPosts(groupId) {
+  getGroupPosts(groupId) {
     FB.api('/' + groupId + '/feed', (res) => {
       GroupServerActionCreator
         .receiveAllPosts(res);
@@ -16,15 +16,11 @@ export default {
         'POST',
         {message: post.message},
         function(response) {
-
           console.log(response);
-
           if (!response.error) {
-
             GroupServerActionCreator
               .receiveCreatedPost(Object.assign(post, response));
-
-          };
+          }
         }
     );
   },
@@ -36,4 +32,4 @@ export default {
     });
   }
 
-}
+};
