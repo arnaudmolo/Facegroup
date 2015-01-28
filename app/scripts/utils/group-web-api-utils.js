@@ -4,7 +4,7 @@ import FB from 'fb';
 export default {
 
   getGroupPosts(groupId) {
-    FB.api('/' + groupId + '/feed', (res) => {
+    FB.api('/' + groupId + '/feed', function(res) {
       GroupServerActionCreator
         .receiveAllPosts(res);
     });

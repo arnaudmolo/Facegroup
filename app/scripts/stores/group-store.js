@@ -9,7 +9,7 @@ CHANGE_EVENT = 'change';
 _groups = {};
 
 function create(group) {
-  _groups[group.id] = group;
+  _groups[group.id + ''] = group;
 }
 
 function createAll(rawGroups) {

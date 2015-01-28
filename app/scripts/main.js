@@ -5,30 +5,26 @@ import FB from 'fb';
 import { app_id } from './constants/constant';
 import router from './router';
 import Content from './components/content.jsx';
-import GroupWebAPIUtils from './utils/group_web_api_utils';
+import GroupWebAPIUtils from './utils/group-web-api-utils';
 import GroupsActions from './actions/group-actions';
 
 window.React = React;
 
+Content = React.createFactory(Content);
+
 function init() {
-  React.render(
-    Content(),
-    document.getElementsByClassName('content')[0]
-  );
+  // React.render(
+  //   Content(),
+  //   document.getElementsByClassName('content')[0]
+  // );
 
   GroupWebAPIUtils
     .getAllGroups();
 
-  var renderer = (function() {
-    console.log(this);
-  }).bind(router);
-
-  console.log(renderer());
-
   router
     .route('group', '/group/:id', function(req){
 
-      console.log(this);
+      this.render(Content);
 
       GroupsActions
         .changeCurrentGroup(req.params.id);
