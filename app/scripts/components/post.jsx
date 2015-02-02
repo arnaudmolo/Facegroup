@@ -5,16 +5,36 @@ import Autolinker from 'autolinker';
 import Types from './facebook-types';
 import Avatar from './avatar.jsx';
 import Comments from './comments.jsx';
+import CommentStore from './../stores/comment-store';
+
+function getStateFromStores(postId) {
+  return {
+    comments: CommentStore.getCommentsByPostId(postId)
+  };
+}
 
 export default React.createClass(
 
   class Post {
 
+    getInitialState() {
+      return getStateFromStores(this.props.post.id);
+    }
+
+    componentDidMount() {
+      CommentStore.addChangeListener(this._onChange);
+    }
+
+    _onChange() {
+      this.setState(getStateFromStores(this.props.post.id));
+    }
+
     render() {
 
-      var post, Type;
+      var comments, post, Type;
 
       post = this.props.post;
+      comments = this.state.comments;
 
       Type = Types[post.type];
 
@@ -43,7 +63,7 @@ export default React.createClass(
             <Type post={post}></Type>
           </section>
           <footer className="comments-container">
-            {post.comments !== undefined ? <Comments comments={post.comments} postId={post.id}></Comments>:undefined}
+            {comments.length ? <Comments comments={comments} postId={post.id}></Comments>:undefined}
           </footer>
         </div>
       );

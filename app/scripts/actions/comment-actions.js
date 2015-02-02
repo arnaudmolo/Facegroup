@@ -1,13 +1,25 @@
 import AppDispatcher from './../dispatcher/app-dispatcher';
-import CommentConstant from './../constant/comment-constant';
+import { ActionTypes } from './../constants/groups-constants';
 
-export class CommentActions {
+export default {
 
   create(comment) {
-    AppDispatcher.dispatch({
-      actionType: CommentConstant.COMMENT_CREATE,
-      text: comment.text
-    });
+    console.log('comment action', comment);
+    AppDispatcher
+      .handleViewAction({
+        actionType: ActionTypes.CREATE_COMMENT,
+        comment: comment
+      });
+  },
+
+  createAllCommentsFromPost(postId, rawComments) {
+
+    AppDispatcher
+      .handleServerAction({
+        actionType: ActionTypes.CREATE_COMMENT,
+        comments: rawComments
+      });
+
   }
 
 }

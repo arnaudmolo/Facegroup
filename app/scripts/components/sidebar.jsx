@@ -41,12 +41,9 @@ export default React.createClass(
       }
 
       return (
-        <div className="sidebar-container" style={{width: this.state.width}}>
-          <CSSTransitionGroup transitionName="example">
-            <div className="resize-bar" onClick={this.handleDragStart} onDrag={this.handleResize} draggable></div>
-            <input type="text" onKeyPress={this.handleFilter}/>
-            {groupList}
-          </CSSTransitionGroup>
+        <div className="sidebar">
+          <input type="text" onKeyPress={this.handleFilter}/>
+          {groupList}
         </div>
       );
     }

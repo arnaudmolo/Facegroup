@@ -2,6 +2,7 @@ import React from 'react/addons';
 import moment from 'moment';
 import Avatar from './avatar.jsx';
 import CommentInput from './comment-input.jsx';
+import CommentStore from './../stores/comment-store';
 
 export default React.createClass(
 
@@ -21,7 +22,7 @@ export default React.createClass(
 
       var comments, commentsList, limit, rest;
 
-      comments = this.props.comments.data;
+      comments = this.props.comments;
       commentsList = [];
       limit = this.state.nbPosts > comments.length - 1 ?
         comments.length - 1:

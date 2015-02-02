@@ -2,6 +2,7 @@ import AppDispatcher from './../dispatcher/app-dispatcher';
 import { EventEmitter } from 'events';
 import { ActionTypes } from './../constants/groups-constants';
 import GroupStore from './group-store';
+import CommentActions from './../actions/comment-actions';
 
 var PostStore, CHANGE_EVENT, _posts;
 
@@ -21,7 +22,7 @@ function createAll(rawPosts) {
 export default PostStore = Object.assign({}, EventEmitter.prototype, {
 
   getAll() {
-    return _posts;
+    return Object.freeze(Object.clone(_posts));
   },
 
   emitChange() {

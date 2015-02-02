@@ -1,5 +1,6 @@
 import React from 'react/addons';
 import FB from 'fb';
+import CommentActions from './../actions/comment-actions';
 
 export default React.createClass(
 
@@ -7,7 +8,8 @@ export default React.createClass(
 
     getInitialState() {
       return {
-        comment: ''
+        comment: '',
+        disabled: false
       };
     }
 
@@ -21,13 +23,20 @@ export default React.createClass(
 
       e.preventDefault();
 
+      this.setState({disabled: true});
+
       FB.api(
           '/' + this.props.postId + '/comments',
           'POST',
           {message: this.state.comment},
           (response) => {
             console.log(response);
+            this.setState({disabled: false});
             if (response && !response.error) {
+              CommentActions.create({
+                id: response.id,
+                message: this.state.comment
+              });
               this.setState({comment: ''});
             }
           }
@@ -38,7 +47,7 @@ export default React.createClass(
     render() {
       return (
         <form onSubmit={this.handleSubmit}>
-          <input type="text" onChange={this.handleCommentChange} value={this.state.comment}/>
+          <input disabled={this.state.disabled} type="text" onChange={this.handleCommentChange} value={this.state.comment}/>
         </form>
       );
     }

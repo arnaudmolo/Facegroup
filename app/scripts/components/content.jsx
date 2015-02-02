@@ -40,9 +40,7 @@ export default React.createClass(
 
       return (
         <div className="application-container">
-          <div className="sidebar">
-            <Sidebar groups={this.state.groups} />
-          </div>
+          <Sidebar groups={this.state.groups} />
           <div className="page-with-nav-content">
             <div className="posts-container">{posts}</div>
           </div>

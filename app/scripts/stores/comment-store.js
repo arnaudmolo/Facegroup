@@ -4,18 +4,24 @@ import { ActionTypes } from './../constants/groups-constants';
 import PostStore from './post-store';
 import { convertRawComment } from './../utils/post-comment-utils';
 
-
 var CommentStore, CHANGE_EVENT, _comments;
 
 CHANGE_EVENT = 'change';
 
 _comments = {};
 
-function _addComments(rawComments) {
+function create(rawComment, postId) {
+  rawComment.postId = postId;
+  if (_comments[rawComment.id]) {
+    console.warn('obejct already exist');
+  }else{
+    _comments[rawComment.id] = rawComment;
+  }
+}
+
+function createAll(rawComments, postId) {
   rawComments.forEach(function(comment) {
-    if (!_comments[comment.id]) {
-      _comments[comment.id] = convertRawComment(comment);
-    }
+    create(comment, postId);
   });
 }
 
@@ -59,16 +65,20 @@ export default CommentStore = Object.assign({}, EventEmitter.prototype, {
     return postMessages;
   },
 
-  getCreatedCommentData(text, postId) {
+  getCommentsByPostId(postId) {
 
-    var timestamp;
+    var comments;
 
-    timestamp = Date.now();
+    comments = [];
 
-    return {
-      id: 'c_' + timestamp,
-      postId: postId
-    };
+    Object.keys(_comments).forEach(function(commentId) {
+      if (_comments[commentId].postId === postId) {
+        comments.push(_comments[commentId]);
+      };
+    });
+
+    return comments;
+
   }
 
 });
@@ -90,45 +100,8 @@ CommentStore.dispatchToken = AppDispatcher.register(function(payload) {
       break;
 
     case ActionTypes.RECEIVE_RAW_COMMENTS:
-
-      _addComments(action.rawComments);
-      AppDispatcher.waitFor([PostStore.dispatchToken]);
+      createAll(action.rawComments, action.postId);
       CommentStore.emitChange();
-
   }
 
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

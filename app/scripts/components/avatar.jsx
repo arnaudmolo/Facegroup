@@ -2,11 +2,7 @@ import React from 'react/addons';
 
 export default class Avatar extends React.Component {
 
-  static test = 'this is a test';
-
   render(){
-
-    console.log(this.test);
 
     var user;
 

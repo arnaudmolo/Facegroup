@@ -3,12 +3,13 @@ import { ActionTypes } from './../constants/groups-constants';
 
 export default {
 
-  receiveAllComments(rawComments) {
+  receiveAllComments(rawComments, postId) {
 
     AppDispatcher
       .handleServerAction({
         type: ActionTypes.RECEIVE_RAW_COMMENTS,
-        rawComments
+        rawComments,
+        postId
       });
 
   },
@@ -25,11 +26,21 @@ export default {
 
   receiveAllPosts(rawPosts) {
 
+    var comments;
+
     AppDispatcher
       .handleServerAction({
         type: ActionTypes.RECEIVE_RAW_POSTS,
         rawPosts
       });
+
+    comments = [];
+
+    rawPosts.data.forEach((post) => {
+      if (post.comments) {
+        this.receiveAllComments(post.comments.data, post.id);
+      };
+    });
 
   },
 
