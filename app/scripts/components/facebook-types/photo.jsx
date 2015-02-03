@@ -1,22 +1,17 @@
 import React from 'react/addons';
 
-export default React.createClass(
+export default class Photo extends React.Component {
 
-  class Photo {
+  render(){
 
-    render(){
+    var post;
 
-      var post;
+    post = this.props.post;
 
-      post = this.props.post;
+    return (
+      <a href={post.link} target="_blank">
+        <img src={post.picture} />
+      </a>);
+  }
 
-      return (
-        <a href={post.link} target="_blank">
-          <img src={post.picture} />
-        </a>);
-    }
-
-  }.prototype
-
-);
-
+}

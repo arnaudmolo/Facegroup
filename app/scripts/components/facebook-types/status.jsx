@@ -1,14 +1,9 @@
 import React from 'react/addons';
 
-export default React.createClass(
+export default class Status extends React.Component {
 
-  class Status {
+  render(){
+    return (<span></span>);
+  }
 
-    render(){
-      return (<span></span>);
-    }
-
-  }.prototype
-
-);
-
+}

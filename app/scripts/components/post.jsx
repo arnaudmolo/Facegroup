@@ -13,7 +13,7 @@ function getStateFromStores(postId) {
   };
 }
 
-export default class Group extends React.Component {
+export default class Post extends React.Component {
 
   constructor(props) {
     super(props);

@@ -1,17 +1,12 @@
 import React from 'react/addons';
 
-export default React.createClass(
+export default class Link extends React.Component {
 
-  class Link {
+  render(){
 
-    render(){
+    console.log('links', this.props);
 
-      console.log('links', this.props);
+    return (<p>link</p>);
+  }
 
-      return (<p>link</p>);
-    }
-
-  }.prototype
-
-);
-
+}

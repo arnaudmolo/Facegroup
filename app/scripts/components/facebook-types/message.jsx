@@ -1,14 +1,9 @@
 import React from 'react/addons';
 
-export default React.createClass(
+export default class Message extends React.Component {
 
-  class Message {
+  render(){
+    return (<p>message</p>);
+  }
 
-    render(){
-      return (<p>message</p>);
-    }
-
-  }.prototype
-
-);
-
+}

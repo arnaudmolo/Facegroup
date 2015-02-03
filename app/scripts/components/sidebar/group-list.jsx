@@ -1,32 +1,29 @@
 import React from 'react/addons';
-import _ from 'lodash';
+import {sortBy} from 'lodash';
 
-export default React.createClass(
+export default class GroupList extends React.Component {
 
-  class GroupList {
+  render() {
 
-    render() {
+    var itemsList;
 
-      var itemsList;
+    itemsList = sortBy(this.props.items, 'bookmark_order')
+      .map(function(d){
+        return (
+          <div key={d.id} className="menu-item">
+            <a href={`/group/${d.id}`}>
+              <span>{d.name}</span>
+              {d.unread?<span className="unread-post">{d.unread}</span>:null}
+            </a>
+          </div>
+        );
+      });
 
-      itemsList = _.sortBy(this.props.items, 'bookmark_order')
-        .map(function(d){
-          return (
-            <div key={d.id} className="menu-item">
-              <a href={`/group/${d.id}`}>
-                <span>{d.name}</span>
-                {d.unread?<span className="unread-post">{d.unread}</span>:null}
-              </a>
-            </div>
-          );
-        });
+    return (
+      <div className="menu-item-container">
+          { itemsList }
+      </div>
+    );
+  }
 
-      return (
-        <div className="menu-item-container">
-            { itemsList }
-        </div>
-      );
-    }
-  }.prototype
-
-);
+}

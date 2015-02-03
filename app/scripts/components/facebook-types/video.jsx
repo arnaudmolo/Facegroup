@@ -1,15 +1,11 @@
 import React from 'react/addons';
 
-export default React.createClass(
+export default class Video extends React.Component {
 
-  class Video {
+  render(){
+    return (
+      <video controls src={this.props.post.source}></video>
+    );
+  }
 
-    render(){
-      return (
-        <video controls src={this.props.post.source}></video>
-      );
-    }
-
-  }.prototype
-
-);
+}
