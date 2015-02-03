@@ -12,7 +12,7 @@ _comments = {};
 
 function mockComment(comment) {
   return Object.assign({
-    can_remove: true,
+    can_remove: false,
     created_time: Date.now(),
     from: {
       id: '10205436595175226',
@@ -48,34 +48,16 @@ export default CommentStore = Object.assign({}, EventEmitter.prototype, {
     this.on(CHANGE_EVENT, callback);
   },
 
+  removeChangeListener(callback) {
+    this.removeListener(CHANGE_EVENT, callback);
+  },
+
   get(id) {
     return _comments[id];
   },
 
   getAll() {
     return _comments;
-  },
-
-  getAllForPost(postId) {
-
-    var postMessages = [];
-
-    for (var id in _comments) {
-      if (_comments[id].postId === postId) {
-        postMessages.push(_comments[id]);
-      }
-    }
-
-    postMessages.sort(function(a, b) {
-      if (a.date < b.date) {
-        return -1;
-      }else{
-        return 1;
-      }
-      return 0;
-    });
-
-    return postMessages;
   },
 
   getCommentsByPostId(postId) {

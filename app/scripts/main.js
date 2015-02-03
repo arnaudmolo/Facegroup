@@ -22,6 +22,9 @@ function init() {
     .getAllGroups();
 
   router
+    .route('index', '/', function(req) {
+      this.render(Content);
+    })
     .route('group', '/group/:id', function(req){
 
       this.render(Content);

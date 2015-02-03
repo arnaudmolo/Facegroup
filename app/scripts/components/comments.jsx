@@ -3,11 +3,13 @@ import moment from 'moment';
 import Avatar from './avatar.jsx';
 import CommentInput from './comment-input.jsx';
 import CommentStore from './../stores/comment-store';
+import binderMixin from './../mixins/binder';
 
 export default class Comments extends React.Component {
 
   constructor(props) {
     super(props);
+    this.binder();
     this.state = {nbPosts: 5};
   }
 
@@ -36,7 +38,7 @@ export default class Comments extends React.Component {
       commentsList.push(
         <li key={comments[i].id} className="comment-container">
           <div className="comment-avatar">
-            <Avatar user={from} name={false}></Avatar>
+            <Avatar user={from} name={false} />
           </div>
           <div className="comment">
             <p className="comment-name">
@@ -59,10 +61,11 @@ export default class Comments extends React.Component {
       <div>
         <ul className="comments-container">{commentsList}</ul>
         {rest?<span onClick={this.handleShowMore}>Show more</span>:undefined}
-        <CommentInput postId={this.props.postId} />
       </div>
     );
 
   }
 
 }
+
+Object.assign(Comments.prototype, binderMixin);

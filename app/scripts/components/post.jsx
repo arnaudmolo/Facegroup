@@ -6,6 +6,8 @@ import Types from './facebook-types';
 import Avatar from './avatar.jsx';
 import Comments from './comments.jsx';
 import CommentStore from './../stores/comment-store';
+import CommentInput from './comment-input.jsx';
+import binderMixin from './../mixins/binder';
 
 function getStateFromStores(postId) {
   return {
@@ -17,11 +19,16 @@ export default class Post extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = getStateFromStores(this.props.post.id);
+    this.binder();
+    this.state = getStateFromStores(props.post.id);
   }
 
   componentDidMount() {
-    CommentStore.addChangeListener(this._onChange.bind(this));
+    CommentStore.addChangeListener(this._onChange);
+  }
+
+  componentWillUnmount() {
+    CommentStore.removeChangeListener(this._onChange);
   }
 
   _onChange() {
@@ -63,9 +70,12 @@ export default class Post extends React.Component {
         </section>
         <footer className="comments-container">
           {comments.length ? <Comments comments={comments} postId={post.id}></Comments>:undefined}
+          <CommentInput postId={post.id} />
         </footer>
       </div>
     );
   }
 
 }
+
+Object.assign(Post.prototype, binderMixin);

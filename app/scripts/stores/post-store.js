@@ -11,6 +11,7 @@ CHANGE_EVENT = 'change';
 _posts = {};
 
 function create(rawPost) {
+  console.log(rawPost);
   rawPost.groupId = rawPost.to.data[0].id;
   _posts[rawPost.id] = rawPost;
 }
