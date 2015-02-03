@@ -40,6 +40,8 @@ export default GroupStore = Object.assign({}, EventEmitter.prototype, {
 
 });
 
+GroupStore.setMaxListeners(100);
+
 GroupStore.dispatchToken = AppDispatcher.register(function(payload) {
 
   if (payload.source === PayloadSources.SERVER_ACTION) {

@@ -1,28 +1,23 @@
 import React from 'react/addons';
 import Post from './post.jsx';
 
-export default React.createClass(
+export default class Group extends React.Component {
 
-  class Group {
+  render() {
 
-    render(){
+    var posts, data;
 
-      var posts, data;
+    data = this.props.posts;
 
-      data = this.props.posts;
-
-      posts = data.map(function(d){
-        return (
-          <Post key={d.id} post={d}></Post>
-        );
-      });
-
+    posts = data.map(function(d){
       return (
-        <div>{ posts }</div>
+        <Post key={d.id} post={d}></Post>
       );
-    }
+    });
 
-  }.prototype
+    return (
+      <div>{ posts }</div>
+    );
+  }
 
-);
-
+}

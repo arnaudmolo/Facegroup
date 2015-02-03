@@ -10,18 +10,31 @@ CHANGE_EVENT = 'change';
 
 _comments = {};
 
-function create(rawComment, postId) {
-  rawComment.postId = postId;
+function mockComment(comment) {
+  return Object.assign({
+    can_remove: true,
+    created_time: Date.now(),
+    from: {
+      id: '10205436595175226',
+      name: 'Arnaud Molo'
+    },
+    like_count: 0,
+    users_likes: false
+  }, comment);
+}
+
+function create(rawComment) {
   if (_comments[rawComment.id]) {
     console.warn('obejct already exist');
   }else{
-    _comments[rawComment.id] = rawComment;
+    _comments[rawComment.id] = mockComment(rawComment);
   }
 }
 
 function createAll(rawComments, postId) {
   rawComments.forEach(function(comment) {
-    create(comment, postId);
+    comment.postId = postId;
+    create(comment);
   });
 }
 
@@ -83,6 +96,8 @@ export default CommentStore = Object.assign({}, EventEmitter.prototype, {
 
 });
 
+CommentStore.setMaxListeners(100);
+
 CommentStore.dispatchToken = AppDispatcher.register(function(payload) {
 
   var action;
@@ -91,11 +106,7 @@ CommentStore.dispatchToken = AppDispatcher.register(function(payload) {
 
   switch(action.type) {
     case ActionTypes.CREATE_COMMENT:
-
-      var comment;
-
-      comment = CommentStore.getCreatedCommentData(action.text, action.postId);
-      _comments[comment.id] = comment;
+      create(action.comment);
       CommentStore.emitChange();
       break;
 

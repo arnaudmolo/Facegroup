@@ -5,14 +5,14 @@ export default class PostActions {
 
   create(text) {
     AppDispatcher.dispatch({
-      actionType: PostConstant.POST_CREATE,
+      type: PostConstant.POST_CREATE,
       text
     });
   }
 
   updateText(id, text) {
     AppDispatcher.dispatch({
-      actionType: PostConstant.POST_UPDATE_TEXT,
+      type: PostConstant.POST_UPDATE_TEXT,
       text
     });
   }

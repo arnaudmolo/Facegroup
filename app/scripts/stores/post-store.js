@@ -54,6 +54,8 @@ export default PostStore = Object.assign({}, EventEmitter.prototype, {
 
 });
 
+PostStore.setMaxListeners(100);
+
 PostStore.dispatchToken = AppDispatcher.register(function(payload) {
 
   var action;

@@ -13,43 +13,39 @@ function getStateFromStores() {
   };
 }
 
-export default React.createClass(
+export default class Content extends React.Component {
 
-  class Content {
+  constructor(props) {
+    super(props);
+    this.state = getStateFromStores();
+  }
 
-    getInitialState() {
-      return getStateFromStores();
+  componentDidMount() {
+    GroupStore.addChangeListener(this._onChange.bind(this));
+    PostStore.addChangeListener(this._onChange.bind(this));
+  }
+
+  _onChange() {
+    this.setState(getStateFromStores());
+  }
+
+  render() {
+
+    var posts;
+
+    if (this.state.posts) {
+      posts = (<Group posts={this.state.posts} />);
     }
 
-    componentDidMount() {
-      GroupStore.addChangeListener(this._onChange);
-      PostStore.addChangeListener(this._onChange);
-    }
-
-    _onChange() {
-      this.setState(getStateFromStores());
-    }
-
-    render() {
-
-      var posts;
-
-      if (this.state.posts) {
-        posts = (<Group posts={this.state.posts} />);
-      }
-
-      return (
-        <div className="application-container">
-          <Sidebar groups={this.state.groups} />
-          <div className="page-with-nav-content">
-            <div className="posts-container">{posts}</div>
-          </div>
+    return (
+      <div className="application-container">
+        <Sidebar groups={this.state.groups} />
+        <div className="page-with-nav-content">
+          <div className="posts-container">{posts}</div>
         </div>
-      );
+      </div>
+    );
 
-    }
+  }
 
-  }.prototype
-
-);
-
+}
