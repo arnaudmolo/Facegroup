@@ -38,6 +38,10 @@ function createAll(rawComments, postId) {
   });
 }
 
+function remove(id) {
+  delete _comments[id];
+};
+
 export default CommentStore = Object.assign({}, EventEmitter.prototype, {
 
   emitChange() {
@@ -94,6 +98,12 @@ CommentStore.dispatchToken = AppDispatcher.register(function(payload) {
 
     case ActionTypes.RECEIVE_RAW_COMMENTS:
       createAll(action.rawComments, action.postId);
+      CommentStore.emitChange();
+      break;
+
+    case ActionTypes.DELETE_COMMENT:
+      remove(action.id);
+      console.log('remove');
       CommentStore.emitChange();
   }
 

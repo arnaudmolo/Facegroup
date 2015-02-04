@@ -5,6 +5,7 @@ export default Object.freeze({
     CREATE_COMMENT: null,
     RECEIVE_RAW_CREATED_COMMENTS: null,
     RECEIVE_RAW_COMMENTS: null,
+    DELETE_COMMENT: null,
 
     CREATE_POST: null,
     RECEIVE_RAW_CREATED_POST: null,

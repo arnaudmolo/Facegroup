@@ -1,9 +1,8 @@
 import React from 'react/addons';
-import moment from 'moment';
-import Avatar from './avatar.jsx';
 import CommentInput from './comment-input.jsx';
 import CommentStore from './../stores/comment-store';
 import binderMixin from './../mixins/binder';
+import Comment from './comment.jsx';
 
 export default class Comments extends React.Component {
 
@@ -29,31 +28,8 @@ export default class Comments extends React.Component {
     rest = comments.length - 1 - limit;
 
     for (var i = 0; i <= limit; i++) {
-
-      let from, comment;
-
-      comment = comments[i];
-      from = comment.from;
-
       commentsList.push(
-        <li key={comments[i].id} className="comment-container">
-          <div className="comment-avatar">
-            <Avatar user={from} name={false} />
-          </div>
-          <div className="comment">
-            <p className="comment-name">
-              <a href={'https://www.facebook.com/' + from.id} target="_blank">{from.name}</a>
-              <time className="post-time">
-                <a
-                  href={'https://www.facebook.com/' + comment.id + '/'}
-                  target="_blank">
-                    {moment(comment.created_time).fromNow()}
-                </a>
-              </time>
-            </p>
-            <p>{comments[i].message}</p>
-          </div>
-        </li>
+        <Comment comment={comments[i]} />
       );
     }
 

@@ -33,6 +33,24 @@ export default {
         comments: rawComments
       });
 
+  },
+
+  remove(id) {
+    FB.api(
+      `/${id}`,
+      'DELETE',
+      (response) => {
+
+        if (response && !response.error) {
+          AppDispatcher
+            .handleViewAction({
+              type: ActionTypes.DELETE_COMMENT,
+              id
+            });
+        };
+
+      }
+    );
   }
 
 }
