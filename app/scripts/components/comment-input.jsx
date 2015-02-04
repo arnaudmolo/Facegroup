@@ -1,9 +1,8 @@
 import React from 'react/addons';
-import FB from 'fb';
 import CommentActions from './../actions/comment-actions';
 import binderMixin from './../mixins/binder';
 
-let initialState = Object.freeze({
+const initialState = Object.freeze({
   comment: '',
   disabled: false
 });
@@ -36,8 +35,8 @@ export default class CommentInput extends React.Component {
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit.bind(this)}>
-        <input disabled={this.state.disabled} type="text" onChange={this.handleCommentChange.bind(this)} value={this.state.comment}/>
+      <form onSubmit={this.handleSubmit}>
+        <input disabled={this.state.disabled} type="text" onChange={this.handleCommentChange} value={this.state.comment}/>
       </form>
     );
   }

@@ -11,7 +11,6 @@ CHANGE_EVENT = 'change';
 _posts = {};
 
 function create(rawPost) {
-  console.log(rawPost);
   rawPost.groupId = rawPost.to.data[0].id;
   _posts[rawPost.id] = rawPost;
 }
@@ -40,14 +39,19 @@ export default PostStore = Object.assign({}, EventEmitter.prototype, {
 
   getPostsForCurrentGroup() {
 
-    var res;
+    var res, currentId;
 
     res = [];
+    currentId = GroupStore.getCurrentId();
 
     Object.keys(_posts).forEach(function(d){
-      if (_posts[d].groupId === GroupStore.getCurrentId()) {
+      if (_posts[d].groupId === currentId) {
         res.push(_posts[d]);
       };
+    });
+
+    res.sort(function(a, b) {
+      return new Date(b.updated_time) - new Date(a.updated_time);
     });
 
     return res;
@@ -67,6 +71,11 @@ PostStore.dispatchToken = AppDispatcher.register(function(payload) {
     case ActionTypes.RECEIVE_RAW_POSTS:
       createAll(action.rawPosts.data);
       PostStore.emitChange();
+      break;
+    case ActionTypes.CREATE_POST:
+      create(action.post);
+      PostStore.emitChange();
+      break;
   }
 
 });

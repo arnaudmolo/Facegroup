@@ -50,6 +50,7 @@ GroupStore.dispatchToken = AppDispatcher.register(function(payload) {
       case ActionTypes.RECEIVE_RAW_GROUPS:
         createAll(payload.action.rawGroups.groups.data);
         GroupStore.emitChange();
+        break;
     }
 
   }
@@ -59,6 +60,7 @@ GroupStore.dispatchToken = AppDispatcher.register(function(payload) {
     switch(payload.action.type) {
       case ActionTypes.CHANGE_GROUP:
         _currentId = payload.action.id;
+        break;
     }
 
   };
