@@ -103,7 +103,6 @@ CommentStore.dispatchToken = AppDispatcher.register(function(payload) {
 
     case ActionTypes.DELETE_COMMENT:
       remove(action.id);
-      console.log('remove');
       CommentStore.emitChange();
   }
 
