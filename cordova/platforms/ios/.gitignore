@@ -1,5 +1,15 @@
 *.mode1v3
+*.perspective
 *.perspectivev3
 *.pbxuser
 .DS_Store
 build/
+
+*.mode1v3
+*.mode2v3
+
+xcuserdata
+
+*~.nib
+
+*.xcworkspace
