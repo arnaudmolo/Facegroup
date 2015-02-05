@@ -5,5 +5,5 @@ dist
 bower_components
 .DS_Store
 npm-debug.log
-cordova/www/styles
-cordova/www/js
+./cordova/www/styles
+./cordova/www/js
