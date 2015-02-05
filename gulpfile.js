@@ -60,8 +60,13 @@ gulp.task('cordova-scripts', function(){
 
 gulp.task('copy-to-cordova', function(){
 
+  gulp.src(dist + '/index.html')
+    .pipe($.copy('./cordova/www', {prefix: 2}));
+
   gulp.src(dist + '/styles/styles.css')
     .pipe($.copy('./cordova/www/css', {prefix: 2}));
+
+  return
 
 });
 
