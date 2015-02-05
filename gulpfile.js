@@ -53,7 +53,7 @@ gulp.task('cordova-scripts', function(){
     .transform(brShim)
     .require(app + 'scripts/main.js', { entry: true })
     .bundle()
-    .pipe(fs.createWriteStream('./cordova/www/js/main.js'))
+    .pipe(fs.createWriteStream('./cordova/www/scripts/main.js'))
     .on('close', function(){exec('cd cordova && cordova build ios -d');});
 
 });
@@ -63,8 +63,11 @@ gulp.task('copy-to-cordova', function(){
   gulp.src(dist + '/index.html')
     .pipe($.copy('./cordova/www', {prefix: 2}));
 
+  gulp.src(dist + '/scripts/debug.js')
+    .pipe($.copy('./cordova/www', {prefix: 1}));
+
   gulp.src(dist + '/styles/styles.css')
-    .pipe($.copy('./cordova/www/css', {prefix: 2}));
+    .pipe($.copy('./cordova/www/styles', {prefix: 2}));
 
   return
 
