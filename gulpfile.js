@@ -58,6 +58,13 @@ gulp.task('cordova-scripts', function(){
 
 });
 
+gulp.task('copy-to-cordova', function(){
+
+  return gulp.src(`${dist}/styles/styles.css`)
+  .pipe($.copy('./cordova/www/css/'));
+
+});
+
 gulp.task('scripts', function(){
 
   return browserify({ debug: false })

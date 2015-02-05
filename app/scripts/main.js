@@ -8,6 +8,14 @@ import Content from './components/content.jsx';
 import GroupWebAPIUtils from './utils/group-web-api-utils';
 import GroupsActions from './actions/group-actions';
 
+if (process.env.NODE_ENV === 'desktop') {
+  import './env/desktop';
+};
+
+if (process.env.NODE_ENV === 'mobile') {
+  import './env/mobile';
+};
+
 window.React = React;
 
 Content = React.createFactory(Content);
