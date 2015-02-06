@@ -7,16 +7,25 @@ import router from './router';
 import Content from './components/content.jsx';
 import GroupWebAPIUtils from './utils/group-web-api-utils';
 import GroupsActions from './actions/group-actions';
+import io from 'socket.io-client';
 
 window.React = React;
 
+var io;
+
+io = io('http://127.0.0.1:1337');
+
 Content = React.createFactory(Content);
 
-function init() {
-  // React.render(
-  //   Content(),
-  //   document.getElementsByClassName('content')[0]
-  // );
+function init(auth) {
+
+  io
+    .emit('subscribe', auth.userID);
+
+  io
+    .on('data', function(res) {
+      console.log('new comment', res);
+    });
 
   GroupWebAPIUtils
     .getAllGroups();
